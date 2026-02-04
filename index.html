@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The HVAC Team of Lakeville | Open 24 Hours</title>
+  <meta name="description" content="Locally owned HVAC team keeping Lakeville and surrounding south-metro communities comfortable year round. Certified technicians for heating, cooling and indoor air projects with upfront pricing." />
+  <meta name="theme-color" content="#0b1220" />
+
+  <!-- Social preview -->
+  <meta property="og:title" content="The HVAC Team of Lakeville" />
+  <meta property="og:description" content="Open 24 hours. Heating, cooling & indoor air quality for Lakeville & south metro." />
+  <meta property="og:type" content="website" />
+
+  <!-- Simple favicon (emoji) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❄️</text></svg>">
+
+  <style>
+    /* =========================
+      THE HVAC TEAM OF LAKEVILLE
+      Single-file demo (index.html)
+      - Unsplash placeholders
+      - CSS animations + hover effects
+      - Scroll reveal animations (JS)
+      - Modern UI polish
+    ========================== */
+
+    :root{
+      --bg: #050b17;
+      --bg2:#020617;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.04);
+      --border: rgba(255,255,255,.12);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.58);
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --softshadow: 0 12px 30px rgba(0,0,0,.22);
+      --g1: #22d3ee;
+      --g2: #6366f1;
+      --g3: #10b981;
+      --radius: 22px;
+      --radius2: 28px;
+      --max: 1120px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 50% -10%, rgba(34,211,238,.18), transparent 60%),
+        radial-gradient(900px 500px at 110% 20%, rgba(99,102,241,.16), transparent 55%),
+        radial-gradient(900px 500px at 0% 90%, rgba(16,185,129,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      overflow-x:hidden;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Accessibility */
+    .skip-link{
+      position:absolute;left:-999px;top:12px;
+      background:#fff;color:#000;
+      padding:10px 12px;border-radius:12px;z-index:9999
+    }
+    .skip-link:focus{left:12px}
+
+    /* Container */
+    .container{max-width:var(--max);margin:0 auto;padding:0 18px}
+
+    /* Top nav */
+    .nav{
+      position:sticky;top:0;z-index:50;
+      transition: background .25s ease, border-color .25s ease, transform .25s ease;
+      border-bottom:1px solid transparent;
+    }
+    .nav.scrolled{
+      background: rgba(3,7,18,.72);
+      backdrop-filter: blur(14px);
+      border-color: rgba(255,255,255,.10);
+    }
+    .nav-inner{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 0;gap:16px
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:42px;height:42px;border-radius:14px;
+      display:grid;place-items:center;
+      background: rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: var(--softshadow);
+      transition: transform .25s ease;
+      font-weight:900;letter-spacing:-.02em
+    }
+    .brand:hover .logo{transform:scale(1.06)}
+    .brand-title{font-weight:900;letter-spacing:-.02em;line-height:1.05}
+    .brand-sub{font-size:12px;color:var(--muted2);margin-top:2px}
+
+    .nav-links{
+      display:none;gap:18px;font-size:14px;color:var(--muted);
+      align-items:center;
+    }
+    @media (min-width: 860px){
+      .nav-links{display:flex}
+    }
+
+    .navlink{
+      position:relative;padding:8px 2px;
+      transition: color .2s ease;
+    }
+    .navlink:hover{color:rgba(255,255,255,.95)}
+    .navlink:after{
+      content:"";position:absolute;left:0;bottom:2px;height:2px;width:0%;
+      background: linear-gradient(90deg, var(--g1), var(--g2));
+      transition: width .26s ease;
+      border-radius:999px;
+    }
+    .navlink:hover:after{width:100%}
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:12px 16px;border-radius:16px;font-weight:900;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      transition: transform .18s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+      user-select:none;white-space:nowrap;
+    }
+    .btn:active{transform:translateY(1px) scale(.99)}
+    .btn:hover{transform:translateY(-2px);background: rgba(255,255,255,.08);border-color: rgba(255,255,255,.22)}
+    .btn.primary{
+      border-color: rgba(255,255,255,.12);
+      background: linear-gradient(135deg, rgba(34,211,238,.95), rgba(99,102,241,.95));
+      box-shadow: 0 20px 60px rgba(99,102,241,.18);
+    }
+    .btn.primary:hover{box-shadow: 0 26px 80px rgba(34,211,238,.16)}
+    .btn.ghost{background: rgba(255,255,255,.04)}
+    .btn.small{padding:10px 14px;border-radius:14px;font-size:14px}
+
+    /* Hero */
+    .hero{padding:28px 0 40px;position:relative;overflow:hidden}
+    .glow{
+      pointer-events:none;position:absolute;inset:0;
+    }
+    .glow::before{
+      content:"";position:absolute;left:50%;top:-220px;transform:translateX(-50%);
+      width:560px;height:560px;border-radius:999px;
+      background: rgba(34,211,238,.18);filter: blur(90px);
+    }
+    .glow::after{
+      content:"";position:absolute;right:-260px;top:40px;
+      width:560px;height:560px;border-radius:999px;
+      background: rgba(99,102,241,.18);filter: blur(90px);
+    }
+    .hero-grid{display:grid;gap:28px;align-items:center}
+    @media (min-width: 980px){
+      .hero-grid{grid-template-columns:1.15fr .85fr;gap:36px}
+    }
+
+    .pill{
+      display:inline-flex;align-items:center;gap:10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding:8px 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .pulse-dot{
+      width:10px;height:10px;border-radius:999px;background: var(--g1);
+      box-shadow: 0 0 0 rgba(34,211,238,.65);
+      animation:pulse 1.6s infinite;
+    }
+    @keyframes pulse{
+      0%{box-shadow:0 0 0 0 rgba(34,211,238,.55)}
+      70%{box-shadow:0 0 0 14px rgba(34,211,238,0)}
+      100%{box-shadow:0 0 0 0 rgba(34,211,238,0)}
+    }
+
+    h1{
+      margin:14px 0 0;
+      font-size: 40px;
+      line-height: 1.05;
+      letter-spacing: -.03em;
+      font-weight: 950;
+    }
+    @media (min-width: 600px){ h1{font-size:52px} }
+
+    .lead{margin:14px 0 0;color:var(--muted);font-size:18px;max-width:58ch}
+
+    .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .badge{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      padding:8px 12px;border-radius:999px;
+      font-size:13px;color:var(--muted);
+      transition: transform .2s ease, background .2s ease;
+    }
+    .badge:hover{transform: translateY(-2px);background: rgba(255,255,255,.07)}
+
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+
+    .card{
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--softshadow);
+      padding:16px;
+    }
+
+    .media{
+      border-radius: 22px;
+      border:1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+      aspect-ratio: 4 / 3;
+      position:relative;
+    }
+    .media img{
+      width:100%;height:100%;object-fit:cover;
+      transform: scale(1.05);
+      transition: transform .8s ease;
+    }
+    .card:hover .media img{transform: scale(1.12)}
+    .media::after{
+      content:"";position:absolute;inset:0;
+      background: linear-gradient(180deg, rgba(2,6,23,0) 30%, rgba(2,6,23,.35) 100%);
+      opacity:.9;
+    }
+
+    .mini-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px
+    }
+    .mini{
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      padding:12px;
+      transition: transform .22s ease, background .22s ease, border-color .22s ease;
+    }
+    .mini:hover{transform: translateY(-2px);background: rgba(255,255,255,.06);border-color: rgba(255,255,255,.18)}
+    .mini strong{display:block;font-weight:950}
+    .mini span{display:block;color:var(--muted2);font-size:12px;margin-top:3px}
+
+    .float-tag{
+      position:absolute;left:-16px;bottom:-16px;
+      display:none;
+    }
+    @media (min-width: 980px){ .float-tag{display:block} }
+    .float-tag .tag{
+      border-radius: 20px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(14px);
+      padding:14px 16px;
+      box-shadow: var(--softshadow);
+      animation: floaty 3.2s ease-in-out infinite;
+    }
+    @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    .tag small{display:block;color:var(--muted2);font-size:12px}
+    .tag b{display:block;font-size:16px}
+
+    /* Section base */
+    section{padding:44px 0}
+    .eyebrow{
+      display:inline-flex;
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color: var(--muted2);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      padding:8px 12px;
+      border-radius:999px;
+    }
+    .h2{
+      margin:14px 0 0;
+      font-size: 34px;
+      line-height: 1.12;
+      letter-spacing: -.02em;
+      font-weight: 950;
+    }
+    @media (min-width: 760px){ .h2{font-size:42px} }
+    .p{margin:12px 0 0;color:var(--muted);max-width:70ch}
+
+    /* Services */
+    .services-head{
+      display:flex;align-items:flex-end;justify-content:space-between;
+      gap:18px;flex-wrap:wrap
+    }
+    .grid{
+      display:grid;gap:14px;margin-top:18px
+    }
+    @media (min-width: 760px){ .grid{grid-template-columns:repeat(2,1fr)} }
+    @media (min-width: 1080px){ .grid{grid-template-columns:repeat(4,1fr)} }
+
+    .service{
+      position:relative;overflow:hidden;
+      border-radius: var(--radius);
+      padding:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      transition: transform .22s ease, border-color .22s ease, background .22s ease;
+    }
+    .service::before{
+      content:"";position:absolute;inset:-40% -30%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(34,211,238,.18), transparent 60%),
+        radial-gradient(circle at 70% 70%, rgba(99,102,241,.14), transparent 55%);
+      opacity:0;transition:opacity .28s ease;
+    }
+    .service:hover::before{opacity:1}
+    .service:hover{
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,.18);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+    }
+    .svc-icn{
+      width:44px;height:44px;border-radius:16px;
+      display:grid;place-items:center;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      position:relative;z-index:1;
+      font-size:22px;
+    }
+    .svc-title{margin-top:12px;font-weight:950;position:relative;z-index:1}
+    .svc-desc{margin-top:8px;color:var(--muted);font-size:14px;position:relative;z-index:1}
+    .underline{
+      margin-top:14px;height:2px;width:40%;
+      background: linear-gradient(90deg, var(--g1), var(--g2));
+      border-radius:999px;opacity:.78;
+      transition: width .22s ease;
+      position:relative;z-index:1;
+    }
+    .service:hover .underline{width:70%}
+
+    /* Split sections */
+    .split{
+      display:grid;gap:22px;align-items:center
+    }
+    @media (min-width: 980px){
+      .split{grid-template-columns:1.05fr .95fr;gap:34px}
+      .split.flip{grid-template-columns:.95fr 1.05fr}
+      .split.flip .split-text{order:2}
+    }
+
+    .bullets{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+    .bullets li{display:flex;gap:10px;align-items:flex-start;color: rgba(255,255,255,.80)}
+    .check{
+      width:22px;height:22px;border-radius:8px;
+      display:grid;place-items:center;
+      background: rgba(34,211,238,.15);
+      border:1px solid rgba(34,211,238,.25);
+      margin-top:2px;
+      flex:0 0 auto;
+    }
+
+    /* Reviews */
+    .reviews{display:grid;gap:14px;margin-top:18px}
+    @media (min-width: 980px){ .reviews{grid-template-columns:repeat(3,1fr)} }
+    .review{
+      border-radius: var(--radius);
+      padding:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      transition: transform .22s ease, border-color .22s ease;
+    }
+    .review:hover{transform: translateY(-3px);border-color: rgba(255,255,255,.18)}
+    .stars{letter-spacing:.15em;color: rgba(34,211,238,.95);font-weight:950;margin-bottom:10px}
+    .who{margin-top:12px;font-size:13px;color: var(--muted2)}
+
+    /* CTA */
+    .cta{
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(135deg, rgba(34,211,238,.12), rgba(99,102,241,.10));
+      box-shadow: var(--shadow);
+      padding:20px;
+      display:grid;gap:16px;
+      overflow:hidden;
+      position:relative;
+    }
+    .cta::before{
+      content:"";position:absolute;inset:-40%;
+      background: radial-gradient(circle at 30% 30%, rgba(34,211,238,.22), transparent 60%);
+      opacity:.7;
+    }
+    @media (min-width: 980px){
+      .cta{grid-template-columns:1.25fr .75fr;align-items:center;padding:26px}
+    }
+    .cta > *{position:relative;z-index:1}
+    .cta-side{display:grid;gap:12px}
+    .ctabox{
+      border-radius: 18px;
+      padding:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      transition: transform .22s ease;
+    }
+    .ctabox:hover{transform: translateY(-2px)}
+    .ctabox small{display:block;color: var(--muted2);font-size:12px}
+    .ctabox b{display:block;margin-top:4px;font-size:16px;font-weight:950}
+
+    /* Footer */
+    footer{
+      border-top:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      padding:26px 0;
+    }
+    .foot{
+      display:flex;gap:16px;flex-wrap:wrap;
+      align-items:flex-start;justify-content:space-between;
+      color: var(--muted2);font-size:14px
+    }
+    .foot strong{color: var(--text)}
+
+    /* Reveal animation */
+    .reveal{opacity:0;transform: translateY(16px);transition: opacity .7s ease, transform .7s ease}
+    .reveal.in{opacity:1;transform: translateY(0)}
+    .delay-1{transition-delay:.08s}
+    .delay-2{transition-delay:.16s}
+    .delay-3{transition-delay:.24s}
+
+    /* Subtle entrance */
+    .pop{animation: pop .7s ease both}
+    @keyframes pop{
+      from{opacity:0;transform: translateY(10px) scale(.98)}
+      to{opacity:1;transform: translateY(0) scale(1)}
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="brand" href="#top">
+          <div class="logo">HV</div>
+          <div>
+            <div class="brand-title">The HVAC Team of Lakeville</div>
+            <div class="brand-sub">Open 24 hours • Lakeville</div>
+          </div>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a class="navlink" href="#services">Services</a>
+          <a class="navlink" href="#about">About</a>
+          <a class="navlink" href="#areas">Areas Served</a>
+          <a class="navlink" href="#reviews">Reviews</a>
+        </nav>
+
+        <div style="display:flex;gap:10px;align-items:center">
+          <a class="btn small ghost" href="tel:+19525299945" aria-label="Call (952) 529-9945">Call (952) 529-9945</a>
+          <a class="btn small primary" href="#contact">Get a Quote</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="hero-grid">
+          <div class="reveal pop">
+            <div class="pill">
+              <span class="pulse-dot" aria-hidden="true"></span>
+              Locally owned • Open 24 hours • Lakeville & south metro
+            </div>
+
+            <h1>Reliable heating, cooling & indoor air—done right.</h1>
+
+            <p class="lead">
+              Locally owned HVAC team keeping Lakeville and surrounding south-metro communities comfortable year round.
+              Certified technicians tackle heating, cooling and indoor air projects for homes and small businesses.
+              Clear communication, upfront pricing and tidy workmanship make every visit stress-free.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn primary" href="#contact">Request Service</a>
+              <a class="btn ghost" href="tel:+19525299945">Call (952) 529-9945</a>
+            </div>
+
+            <div class="badges">
+              <span class="badge">Certified technicians</span>
+              <span class="badge">Upfront pricing</span>
+              <span class="badge">Tidy workmanship</span>
+              <span class="badge">Energy-efficient installs</span>
+            </div>
+          </div>
+
+          <div class="card reveal delay-1">
+            <div class="media">
+              <img
+                src="https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=1600&q=80"
+                alt="Modern HVAC system and home comfort (Unsplash placeholder)"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="mini-grid">
+              <div class="mini">
+                <strong>24/7 Availability</strong>
+                <span>Open 24 hours</span>
+              </div>
+              <div class="mini">
+                <strong>Fast Help</strong>
+                <span>Call anytime</span>
+              </div>
+              <div class="mini">
+                <strong>Upfront Pricing</strong>
+                <span>No surprises</span>
+              </div>
+              <div class="mini">
+                <strong>Tidy Work</strong>
+                <span>Cleaner finish</span>
+              </div>
+            </div>
+
+            <div class="float-tag" aria-hidden="true">
+              <div class="tag">
+                <small>Areas served</small>
+                <b>Lakeville</b>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="container">
+        <div class="services-head reveal">
+          <div>
+            <span class="eyebrow">Services</span>
+            <div class="h2">Everything you need for year-round comfort.</div>
+            <p class="p">Heating, cooling, and indoor air solutions for homes and small businesses.</p>
+          </div>
+          <a class="btn ghost" href="#contact">Schedule service →</a>
+        </div>
+
+        <div class="grid">
+          <div class="service reveal">
+            <div class="svc-icn">🔥</div>
+            <div class="svc-title">Heating Repair & Install</div>
+            <div class="svc-desc">Furnace diagnostics, repairs, replacements, and high-efficiency upgrades.</div>
+            <div class="underline"></div>
+          </div>
+
+          <div class="service reveal delay-1">
+            <div class="svc-icn">❄️</div>
+            <div class="svc-title">Air Conditioning</div>
+            <div class="svc-desc">AC tune-ups, repairs, and new installs designed to lower energy costs.</div>
+            <div class="underline"></div>
+          </div>
+
+          <div class="service reveal delay-2">
+            <div class="svc-icn">🌬️</div>
+            <div class="svc-title">Indoor Air Quality</div>
+            <div class="svc-desc">Filters, purifiers, humidifiers, and airflow improvements for healthier air.</div>
+            <div class="underline"></div>
+          </div>
+
+          <div class="service reveal delay-3">
+            <div class="svc-icn">🛠️</div>
+            <div class="svc-title">Maintenance</div>
+            <div class="svc-desc">Seasonal checkups to extend equipment life and help prevent breakdowns.</div>
+            <div class="underline"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="split">
+          <div class="split-text reveal">
+            <span class="eyebrow">Locally Owned • Lakeville</span>
+            <div class="h2">Comfort you can count on—every season.</div>
+            <p class="p">
+              Clear communication, upfront pricing and tidy workmanship make every visit stress-free.
+              From quick furnace fixes to energy-efficient system installs, we deliver reliable results that help lower energy costs and extend equipment life.
+            </p>
+            <ul class="bullets">
+              <li><span class="check">✓</span><span>Upfront pricing and clear explanations</span></li>
+              <li><span class="check">✓</span><span>Tidy workmanship and respect for your home</span></li>
+              <li><span class="check">✓</span><span>Repairs, maintenance, and efficient installs</span></li>
+              <li><span class="check">✓</span><span>Solutions that help extend equipment life</span></li>
+            </ul>
+          </div>
+
+          <div class="card reveal delay-1">
+            <div class="media">
+              <img
+                src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1600&q=80"
+                alt="HVAC technician working on equipment (Unsplash placeholder)"
+                loading="lazy"
+              />
+            </div>
+            <div class="mini-grid">
+              <div class="mini">
+                <strong>Clear</strong>
+                <span>Communication</span>
+              </div>
+              <div class="mini">
+                <strong>Upfront</strong>
+                <span>Pricing</span>
+              </div>
+              <div class="mini">
+                <strong>Tidy</strong>
+                <span>Work</span>
+              </div>
+              <div class="mini">
+                <strong>Reliable</strong>
+                <span>Results</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AREAS -->
+    <section id="areas">
+      <div class="container">
+        <div class="split flip">
+          <div class="split-text reveal">
+            <span class="eyebrow">Areas Served</span>
+            <div class="h2">Proudly serving Lakeville and the south metro.</div>
+            <p class="p">
+              Fast response times, 24/7 availability, and dependable service where you need it most.
+              This is a demo site focused on the primary service area listed below.
+            </p>
+            <ul class="bullets">
+              <li><span class="check">✓</span><span>Lakeville (primary area)</span></li>
+              <li><span class="check">✓</span><span>Surrounding south-metro communities</span></li>
+              <li><span class="check">✓</span><span>Homes and small businesses</span></li>
+              <li><span class="check">✓</span><span>Emergency service available 24 hours</span></li>
+            </ul>
+          </div>
+
+          <div class="card reveal delay-1">
+            <div class="media">
+              <img
+                src="https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1600&q=80"
+                alt="Comfortable modern home interior (Unsplash placeholder)"
+                loading="lazy"
+              />
+            </div>
+            <div class="mini-grid">
+              <div class="mini">
+                <strong>Lakeville</strong>
+                <span>Primary service area</span>
+              </div>
+              <div class="mini">
+                <strong>Open 24 Hours</strong>
+                <span>Call anytime</span>
+              </div>
+              <div class="mini">
+                <strong>Homes</strong>
+                <span>Residential service</span>
+              </div>
+              <div class="mini">
+                <strong>Small Biz</strong>
+                <span>Light commercial</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="reviews">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">Reviews</span>
+          <div class="h2">Stress-free service people talk about.</div>
+          <p class="p">Demo testimonials for layout. Swap these with real reviews when needed.</p>
+        </div>
+
+        <div class="reviews">
+          <div class="review reveal">
+            <div class="stars">★★★★★</div>
+            <div>“They explained everything clearly, fixed our furnace fast, and left the area spotless. Super professional.”</div>
+            <div class="who">Homeowner in Lakeville</div>
+          </div>
+
+          <div class="review reveal delay-1">
+            <div class="stars">★★★★★</div>
+            <div>“Upfront pricing and honest recommendations. Our new system runs quieter and our energy bill dropped.”</div>
+            <div class="who">Small Business Owner</div>
+          </div>
+
+          <div class="review reveal delay-2">
+            <div class="stars">★★★★★</div>
+            <div>“Called after hours and they actually picked up. Tech arrived quickly and got our heat back on.”</div>
+            <div class="who">South Metro Resident</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA / CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="cta reveal">
+          <div>
+            <span class="eyebrow">Get service now</span>
+            <div class="h2">Need help today? We’re open 24 hours.</div>
+            <p class="p">
+              Call anytime for heating, cooling, or indoor air quality service in Lakeville and surrounding south-metro communities.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn primary" href="tel:+19525299945">Call (952) 529-9945</a>
+              <a class="btn ghost" href="#services">View services</a>
+            </div>
+          </div>
+
+          <div class="cta-side">
+            <div class="ctabox">
+              <small>Phone</small>
+              <b><a href="tel:+19525299945">(952) 529-9945</a></b>
+            </div>
+            <div class="ctabox">
+              <small>Hours</small>
+              <b>Open 24 hours</b>
+            </div>
+            <div class="ctabox">
+              <small>Areas served</small>
+              <b>Lakeville</b>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>
+          <strong>The HVAC Team of Lakeville</strong><br />
+          Locally owned • Lakeville • Open 24 hours
+        </div>
+        <div>
+          Phone: (952) 529-9945<br />
+          © <span id="year"></span> All rights reserved.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Sticky nav effect
+    const nav = document.getElementById('nav');
+    const onScroll = () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Scroll reveal (IntersectionObserver)
+    const els = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    els.forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
