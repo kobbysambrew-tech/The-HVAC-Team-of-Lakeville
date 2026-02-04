@@ -247,14 +247,15 @@
     .mini strong{display:block;font-weight:950}
     .mini span{display:block;color:var(--muted2);font-size:12px;margin-top:3px}
 
-    .float-tag{
+   .float-tag{
   position:absolute;
   left:-16px;
-  bottom:90px;           /* moves it up so it won't overlap */
+  top:20px;       /* <-- use top instead of bottom */
   display:none;
-  pointer-events:none;   /* prevents it from blocking clicks */
+  pointer-events:none;
   z-index:2;
 }
+
 @media (min-width: 980px){ .float-tag{display:block} }
 
     .float-tag .tag{
